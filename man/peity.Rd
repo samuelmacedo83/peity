@@ -26,11 +26,14 @@ donut(data, width = NULL, height = NULL, elementId = NULL, ...)
 \item{width}{The chart width. The package already adjusts the chart to the line. Use it
 if you want a specific width.}
 
+\item{height}{The chart height. The package already adjusts the chart to the line. Use it
+if you want a specific height.}
+
 \item{elementId}{A string with the elementId. The package already generates this and you don't
 need to worry. Use this parameter if you need to pass a specific elementId.}
 
-\item{heigth}{The chart height. The package already adjusts the chart to the line. Use it
-if you want a specific height.}
+\item{...}{A list of specific options to hte chart. See details in
+\url{https://benpickles.github.io/peity/}.}
 }
 \description{
 Easily converts an element's content into a svg mini pie, donut, line or bar chart.
@@ -42,7 +45,7 @@ to \code{bar(c(1, 2, 3))}.
 \examples{
 # generate an inline bar plot
 bar1 <- peity(c(1, 2, 3), type = "bar")
-bar2 <- bar(c(1, 2, 3)
+bar2 <- bar(c(1, 2, 3))
 
 \dontrun{
 # if you want to see the result in your browser
