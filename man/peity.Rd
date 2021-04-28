@@ -2,10 +2,52 @@
 % Please edit documentation in R/peity.R
 \name{peity}
 \alias{peity}
-\title{<Add Title>}
+\alias{bar}
+\alias{line}
+\alias{pie}
+\alias{donut}
+\title{Converts an element's content into a svg mini chart}
 \usage{
 peity(data, type = "bar", width = NULL, height = NULL, elementId = NULL, ...)
+
+bar(data, width = NULL, height = NULL, elementId = NULL, ...)
+
+line(data, width = NULL, height = NULL, elementId = NULL, ...)
+
+pie(data, width = NULL, height = NULL, elementId = NULL, ...)
+
+donut(data, width = NULL, height = NULL, elementId = NULL, ...)
+}
+\arguments{
+\item{data}{A vector specifying the values to the chart.}
+
+\item{type}{A string specifying the chart. The options are: "bar", "line", "pie" or "donut".}
+
+\item{width}{The chart width. The package already adjusts the chart to the line. Use it
+if you want a specific width.}
+
+\item{elementId}{A string with the elementId. The package already generates this and you don't
+need to worry. Use this parameter if you need to pass a specific elementId.}
+
+\item{heigth}{The chart height. The package already adjusts the chart to the line. Use it
+if you want a specific height.}
 }
 \description{
-<Add Description>
+Easily converts an element's content into a svg mini pie, donut, line or bar chart.
+Peity function is a wrapper around peity.js and it is compatible with any browser
+that supports svg: Chrome, Firefox, IE9+, Opera, Safari. You can use \code{peity()} and specify
+the chart or use the chart name function. Ex.: \code{peity(c(1, 2, 3), type = "bar")} is similar
+to \code{bar(c(1, 2, 3))}.
+}
+\examples{
+# generate an inline bar plot
+bar1 <- peity(c(1, 2, 3), type = "bar")
+bar2 <- bar(c(1, 2, 3)
+
+\dontrun{
+# if you want to see the result in your browser
+bar1
+bar2
+}
+
 }
