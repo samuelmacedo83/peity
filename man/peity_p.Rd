@@ -10,7 +10,7 @@ peity_p(...)
 \item{...}{Text and charts separated by comma.}
 }
 \description{
-You can group text and charts in the same <p> html tag. It is useful when you
+You can group text and charts in the same p html tag. It is useful when you
 want write in rmarkdown or shiny.
 }
 \examples{
