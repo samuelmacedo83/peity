@@ -10,15 +10,17 @@
 #' @param type A string specifying the chart. The options are: "bar", "line", "pie" or "donut".
 #' @param width The chart width. The package already adjusts the chart to the line. Use it
 #' if you want a specific width.
-#' @param heigth The chart height. The package already adjusts the chart to the line. Use it
+#' @param height The chart height. The package already adjusts the chart to the line. Use it
 #' if you want a specific height.
 #' @param elementId A string with the elementId. The package already generates this and you don't
 #' need to worry. Use this parameter if you need to pass a specific elementId.
+#' @param ... A list of specific options to hte chart. See details in
+#' <https://benpickles.github.io/peity/>.
 #'
 #' @examples
 #' # generate an inline bar plot
 #' bar1 <- peity(c(1, 2, 3), type = "bar")
-#' bar2 <- bar(c(1, 2, 3)
+#' bar2 <- bar(c(1, 2, 3))
 #'
 #' \dontrun{
 #' # if you want to see the result in your browser
@@ -61,8 +63,7 @@ peity_html <- function(id, style, class, ...){
 #' @rdname peity
 #' @export
 bar <- function(data,
-                width = NULL, height = NULL,
-                elementId = NULL,
+                width = NULL, height = NULL, elementId = NULL,
                 ...) {
   peity(data, type = "bar",width, height, elementId, ...)
 }
@@ -70,17 +71,15 @@ bar <- function(data,
 #' @rdname peity
 #' @export
 line <- function(data,
-                 width = NULL, height = NULL,
-                 elementId = NULL,
+                 width = NULL, height = NULL, elementId = NULL,
                  ...) {
-  peity(data, type = "line",width, height, elementId, ...)
+  peity(data, type = "line", width, height, elementId, ...)
 }
 
 #' @rdname peity
 #' @export
 pie <- function(data,
-                width = NULL, height = NULL,
-                elementId = NULL,
+                width = NULL, height = NULL, elementId = NULL,
                 ...) {
   peity(data, type = "pie", width, height, elementId, ...)
 }
@@ -88,8 +87,7 @@ pie <- function(data,
 #' @rdname peity
 #' @export
 donut <- function(data,
-                  width = NULL, height = NULL,
-                  elementId = NULL,
+                  width = NULL, height = NULL, elementId = NULL,
                   ...) {
   peity(data, type = "donut", width, height, elementId, ...)
 }
