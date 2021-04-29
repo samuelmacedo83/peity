@@ -1,13 +1,21 @@
+peity: Inline Charts for R
+================
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
+[![R build
+status](https://github.com/samuelmacedo83/peity//workflows/R-ubuntu/badge.svg)](https://github.com/samuelmacedo83/peity/actions)
+[![R build
+status](https://github.com/samuelmacedo83/peity/workflows/R-macOS/badge.svg)](https://github.com/samuelmacedo83/peity/actions)
+[![R build
+status](https://github.com/samuelmacedo83/peity/workflows/R-windows/badge.svg)](https://github.com/samuelmacedo83/peity/actions)
 
 # peity
 
-<!-- badges: start -->
-[![R-CMD-check](https://github.com/samuelmacedo83/peity/workflows/R-CMD-check/badge.svg)](https://github.com/samuelmacedo83/peity/actions)
-<!-- badges: end -->
-
-The goal of peity is to …
+The peity package is a wrapper around
+[peity.js](https://benpickles.github.io/peity/). It is a `jQuery` plugin
+that easily converts an element’s content into a `svg` mini pie, donut,
+line or bar chart. It is compatible with any browser that supports
+`svg`: Chrome, Firefox, IE9+, Opera, Safari. You can include these
+charts in your shiny app or in your html document when using rmarkdown.
 
 ## Installation
 
@@ -25,46 +33,53 @@ And the development version from [GitHub](https://github.com/) with:
 devtools::install_github("samuelmacedo83/peity")
 ```
 
-## Example
+## Example in shiny
 
-This is a basic example which shows you how to solve a common problem:
-
-``` r
-library(peity)
-#> 
-#> Attaching package: 'peity'
-#> The following object is masked from 'package:stats':
-#> 
-#>     line
-#> The following object is masked from 'package:graphics':
-#> 
-#>     pie
-## basic example code
-```
-
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
+Use `peity_p()` to create a `p` tag and include your charts wherever you
+want in your shiny app. The code below…
 
 ``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
+library(shiny)
+
+ui <- fluidPage(
+
+    # Charts in your title
+    titlePanel(peity_p(
+        "Your", pie(c(1,2,3)), "title with ", donut(c(1,2,3)), "charts!"
+    )),
+
+    # Sidebar with a slider input for number of bins and a chart
+    sidebarLayout(
+      sidebarPanel(sliderInput("bins",
+        peity_p("Number of bins", bar(c(3,2,1)),":"),
+        min = 1, max = 50, value = 30
+      )),
+      mainPanel(plotOutput("distPlot"))
+    )
+)
+
+# Define server logic required to draw a histogram
+server <- function(input, output) {
+    output$distPlot <- renderPlot({
+      x <- faithful[, 2]
+      bins <- seq(min(x), max(x), length.out = input$bins + 1)
+      hist(x, breaks = bins, col = 'darkgray', border = 'white')
+    })
+}
+
+# Run the application
+shinyApp(ui = ui, server = server)
 ```
 
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this. You could also
-use GitHub Actions to re-render `README.Rmd` every time you push. An
-example workflow can be found here:
-<https://github.com/r-lib/actions/tree/master/examples>.
+… produces this\!
 
-You can also embed plots, for example:
+<img src="tools/readme/shiny.png" class="screenshot"/>
 
-<img src="man/figures/README-pressure-1.png" width="100%" />
+## Example in rmarkdown
 
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.
+You can also use `peity_p()` to include your charts in a `html_document`
+when using rmarkdown. Create a `.Rmd` file with `output: html_document`
+and use to produce this. `` `r peity_p("Your markdown", pie(c(1,2,3)),
+"with inline", line(c(1,2,3)), "charts!")` ``
+
+<img src="tools/readme/rmarkdown.png" class="screenshot"/>
