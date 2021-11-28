@@ -1,3 +1,6 @@
+#´Este pull request foi apenas para estudo.
+
+
 #'  Converts an element's content into a svg mini chart
 #'
 #' Easily converts an element's content into a svg mini pie, donut, line or bar chart.
